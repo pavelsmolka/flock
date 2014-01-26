@@ -1,0 +1,20 @@
+{
+    "name" : "flock/flock",
+    "description" : "Twitter app for aggregating tweets",
+
+    "require" : {
+        "php" : ">=5.5",
+        "j7mbo/twitter-api-php": "dev-master"
+    },
+
+    "require-dev" : {
+        "phpunit/phpunit": "3.7.*"
+    },
+
+    "autoload" : {
+        "psr-4" : {
+            "Flock\\" : "src/"
+        }
+    }
+
+}
