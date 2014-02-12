@@ -11,6 +11,7 @@ namespace Flock\Storage;
 
 use Flock\Fetch\User;
 use Redis;
+use stdClass;
 
 class RedisUserBasedStorage implements IUserBasedStorage {
 
@@ -24,11 +25,25 @@ class RedisUserBasedStorage implements IUserBasedStorage {
 
     /**
      * @param User $user
-     * @param array $tweets
+     * @param stdClass[] $tweets
      */
     public function saveTweets(User $user, array $tweets) {
         foreach($tweets as $tweet) {
             $this->redis->sAdd('s-' . $user->userName, json_encode($tweet));
         }
+    }
+
+    /**
+     * @param User $user
+     * @return stdClass|null
+     */
+    public function getTweet(User $user) {
+        $tweet = $this->redis->sPop('s-' . $user->userName);
+        if ($tweet) {
+            return json_decode($tweet);
+        } else {
+            return null;
+        }
+
     }
 }

@@ -21,4 +21,8 @@ class EchoUserBasedStorage implements IUserBasedStorage {
             echo "...out of which the $pick. tweet says: '" . $tweets[$pick]->text . "'.\n\n";
         }
     }
+
+    public function getTweet(User $user) {
+        return null;
+    }
 }
