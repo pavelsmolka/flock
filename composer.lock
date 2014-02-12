@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "002a8918672978d94f0cc1f87f913c9f",
+    "hash": "cd24bd86d56254df48f21aea0807f6a2",
     "packages": [
         {
             "name": "j7mbo/twitter-api-php",
@@ -459,6 +459,55 @@
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
             "time": "2013-12-28 08:12:03"
+        },
+        {
+            "name": "ukko/phpredis-phpdoc",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ukko/phpredis-phpdoc.git",
+                "reference": "7452dff8ec53c7b057a83d04f647f09f6c3f6490"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ukko/phpredis-phpdoc/zipball/7452dff8ec53c7b057a83d04f647f09f6c3f6490",
+                "reference": "7452dff8ec53c7b057a83d04f647f09f6c3f6490",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "phpredis-phpdoc": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Max Kamashev",
+                    "email": "max.kamashev@gmail.com",
+                    "homepage": "http://uk0.us/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "@phpdoc extension phpredis for IDE autocomplete",
+            "homepage": "https://github.com/ukko/phpredis-phpdoc",
+            "keywords": [
+                "helper",
+                "phpredis",
+                "redis"
+            ],
+            "time": "2014-02-09 14:11:59"
         }
     ],
     "aliases": [
@@ -466,10 +515,12 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "j7mbo/twitter-api-php": 20
+        "j7mbo/twitter-api-php": 20,
+        "ukko/phpredis-phpdoc": 20
     },
     "platform": {
-        "php": ">=5.5"
+        "php": ">=5.5",
+        "ext-redis": "*"
     },
     "platform-dev": [
 

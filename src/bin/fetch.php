@@ -2,13 +2,13 @@
 
 use Flock\Fetch\ConfigProvider;
 use Flock\Fetch\TweetFetch;
-use Flock\Storage\EchoUserBasedStorage;
+use Flock\Storage\RedisUserBasedStorage;
 
 
 require_once "../../vendor/autoload.php";
 
 $configProvider = new ConfigProvider(__DIR__ . '/../../config/config.ini');
-$tweetFetch = new TweetFetch($configProvider, new EchoUserBasedStorage());
+$tweetFetch = new TweetFetch($configProvider, new RedisUserBasedStorage());
 
 try {
 
