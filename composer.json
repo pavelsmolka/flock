@@ -3,9 +3,10 @@
     "description" : "Twitter app for aggregating tweets",
 
     "require" : {
-        "php": ">=5.5",
+        "php": ">=5.4",
         "ext-redis": "*",
-        "j7mbo/twitter-api-php": "dev-master"
+        "j7mbo/twitter-api-php": "dev-master",
+        "kertz/twitteroauth": "dev-master"
     },
 
     "require-dev" : {

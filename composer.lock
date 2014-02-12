@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "cd24bd86d56254df48f21aea0807f6a2",
+    "hash": "0570b3aae036d06c0811cdbef3bc1391",
     "packages": [
         {
             "name": "j7mbo/twitter-api-php",
@@ -43,6 +43,32 @@
                 "twitter"
             ],
             "time": "2013-10-03 10:04:59"
+        },
+        {
+            "name": "kertz/twitteroauth",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kertz/twitteroauth.git",
+                "reference": "88eb43ba510b120bf7791fe78d42a44332c1e0c0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kertz/twitteroauth/zipball/88eb43ba510b120bf7791fe78d42a44332c1e0c0",
+                "reference": "88eb43ba510b120bf7791fe78d42a44332c1e0c0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "twitteroauth"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "time": "2013-08-29 17:04:43"
         }
     ],
     "packages-dev": [
@@ -415,17 +441,17 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.4.1",
+            "version": "v2.4.2",
             "target-dir": "Symfony/Component/Yaml",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "4e1a237fc48145fae114b96458d799746ad89aa0"
+                "reference": "bb6ddaf8956139d1b8c360b4b713ed0138e876b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/4e1a237fc48145fae114b96458d799746ad89aa0",
-                "reference": "4e1a237fc48145fae114b96458d799746ad89aa0",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/bb6ddaf8956139d1b8c360b4b713ed0138e876b3",
+                "reference": "bb6ddaf8956139d1b8c360b4b713ed0138e876b3",
                 "shasum": ""
             },
             "require": {
@@ -449,7 +475,9 @@
             "authors": [
                 {
                     "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
                 },
                 {
                     "name": "Symfony Community",
@@ -458,7 +486,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2013-12-28 08:12:03"
+            "time": "2014-01-07 13:28:54"
         },
         {
             "name": "ukko/phpredis-phpdoc",
@@ -516,10 +544,11 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "j7mbo/twitter-api-php": 20,
+        "kertz/twitteroauth": 20,
         "ukko/phpredis-phpdoc": 20
     },
     "platform": {
-        "php": ">=5.5",
+        "php": ">=5.4",
         "ext-redis": "*"
     },
     "platform-dev": [
