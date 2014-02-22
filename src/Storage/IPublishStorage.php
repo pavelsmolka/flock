@@ -11,8 +11,17 @@ namespace Flock\Storage;
 
 interface IPublishStorage {
 
+    /**
+     * @param string $accountName
+     * @param int $tweetId
+     * @return void
+     */
     public function toBePublished($accountName, $tweetId);
 
-    public function getTweetId($accountId);
+    /**
+     * @param $accountName
+     * @return int|null
+     */
+    public function getTweetId($accountName);
 
 } 

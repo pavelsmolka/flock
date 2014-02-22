@@ -2,26 +2,26 @@
 
 namespace Flock\Publish;
 
+use Flock\Storage\IPublishStorage;
 use \Redis;
-use \TwitterAPIExchange;
-use Flock\Fetch\ConfigProvider;
 use TwitterOAuth;
-use Flock\Publish\StaticAccountListProvider;
 use FlockConfigException;
 
 class TwitterPublisher {
 
     /** @var \Flock\Fetch\ConfigProvider */
     private $configProvider;
-    private $redis;
     
     /** @var TwitterOAuth */
     private $twitterConnection;
+    /**
+     * @var \Flock\Storage\IPublishStorage
+     */
+    private $publishStorage;
 
-    public function __construct($configProvider) {
+    public function __construct(IPublishStorage $publishStorage, $configProvider) {
         $this->configProvider = $configProvider;
-        $this->redis = new Redis();
-        $this->redis->connect('127.0.0.1', 6379);
+        $this->publishStorage = $publishStorage;
     }
 
     public function publish() {
@@ -32,13 +32,12 @@ class TwitterPublisher {
             } catch (FlockConfigException $ex) {
                 continue;
             }
-            $tweetId = $this->redis->sPop($account);
-            while ($tweetId != false) {
+
+            while (null !== ($tweetId = $this->publishStorage->getTweetId($account))) {
                 $connection->post("statuses/retweet/" . $tweetId);
                 if ($connection->lastStatusCode() !== 200) {
                     $toBePushedBack[$account][] = $tweetId;
                 }
-                $tweetId = $this->redis->sPop($account);
             }
         }
         //clean up
@@ -46,13 +45,14 @@ class TwitterPublisher {
     }
 
     /**
-     * Pushes problematic tweets back to the redis set 
-     * @param array of arrays11 $problematicTweets
+     * Pushes problematic tweets back to the the storage
+     *
+     * @param array[] $problematicTweets
      */
     private function pushBackToSet($problematicTweets) {
-        foreach ($problematicTweets as $key => $tweetIds) {
+        foreach ($problematicTweets as $accountName => $tweetIds) {
             foreach ($tweetIds as $tweetId) {
-                $this->redis->sAdd($key, $tweetId);
+                $this->publishStorage->toBePublished($accountName, $tweetId);
             }
         }
     }
