@@ -21,11 +21,11 @@ class RedisPublishStorage implements IPublishStorage {
         $this->redis->connect('localhost');
     }
 
-    public function toBePublished($accountId, $tweetId) {
+    public function toBePublished($accountName, $tweetId) {
         // TODO check if we have already published this tweet ID (control hash)
         // if yes -> discard
         // if no  -> save tweet id to $accountId set
-        echo "We would publish tweet $tweetId to account $accountId\n";
+        echo "We would publish tweet $tweetId to account $accountName\n";
     }
 
     public function getTweetId($accountId) {

@@ -43,7 +43,7 @@ class TweetFetch {
 
             // Enjoy the happiness
             $tweets = json_decode($jsonResult);
-            $this->storage->saveTweets($user, $tweets);
+            $this->storage->saveTweets($tweets);
         }
 
     }

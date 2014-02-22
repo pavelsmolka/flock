@@ -24,21 +24,19 @@ class RedisUserBasedStorage implements IUserBasedStorage {
     }
 
     /**
-     * @param User $user
      * @param stdClass[] $tweets
      */
-    public function saveTweets(User $user, array $tweets) {
+    public function saveTweets(array $tweets) {
         foreach($tweets as $tweet) {
-            $this->redis->sAdd('s-' . $user->userName, json_encode($tweet));
+            $this->redis->sAdd('s-tweets', json_encode($tweet));
         }
     }
 
     /**
-     * @param User $user
      * @return stdClass|null
      */
-    public function getTweet(User $user) {
-        $tweet = $this->redis->sPop('s-' . $user->userName);
+    public function getTweet() {
+        $tweet = $this->redis->sPop('s-tweets');
         if ($tweet) {
             return json_decode($tweet);
         } else {

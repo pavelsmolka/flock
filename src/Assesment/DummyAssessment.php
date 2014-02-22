@@ -12,48 +12,35 @@ namespace Flock\Assessment;
 use Flock\Fetch\User;
 use Flock\Storage\RedisPublishStorage;
 use Flock\Storage\RedisUserBasedStorage;
+use stdClass;
 
-class DummyAssessment {
-
-    protected $sourceStorage;
-    protected $resultStorage;
+class DummyAssessment implements IAssessment {
 
     const PROGRAMOVANI_CZ = 'programovaniCZ';
     const VARENI = 'vareni';
 
-    public function __construct() {
-        $this->sourceStorage = new RedisUserBasedStorage();
-        $this->resultStorage = new RedisPublishStorage();
-    }
+    protected $rules = [
+        'honzajavorek' => [self::PROGRAMOVANI_CZ],
+        'geekovo' => [self::PROGRAMOVANI_CZ],
+        'ostoweb' => [self::PROGRAMOVANI_CZ],
+        'marek_jelen' => [self::PROGRAMOVANI_CZ],
+        'cuketka' => [self::VARENI],
+    ];
 
-    public function work() {
-        foreach($this->getDummyRules() as $userName => $publishing) {
-            $user = new User($userName); // TODO rework, rules should provide already created user objects
-            while (null !== ($tweet = $this->sourceStorage->getTweet($user))) {
-                if (isset($tweet->id)) {
-                    foreach($publishing as $pub) {
-                        $this->resultStorage->toBePublished($pub, $tweet->id);
-                    }
-                }
-            }
+    public function assess(stdClass $tweet) {
 
+        if (!isset($tweet->user->screen_name)) {
+            throw new \FlockException("Invalid tweet entity (does not contain screen_name");
         }
-    }
 
+        $userName = $tweet->user->screen_name;
 
-    /**
-     * TODO just temporary to get it working
-     *
-     * @return array
-     */
-    protected function getDummyRules() {
-        return [
-            'honzajavorek' => [self::PROGRAMOVANI_CZ],
-            'geekovo' => [self::PROGRAMOVANI_CZ],
-            'ostoweb' => [self::PROGRAMOVANI_CZ],
-            'marek_jelen' => [self::PROGRAMOVANI_CZ],
-            'cuketka' => [self::VARENI],
-        ];
+        if (isset($this->rules[$userName])) {
+            return $this->rules[$userName];
+        } else {
+            return [];
+        }
+
     }
 
 } 

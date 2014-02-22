@@ -9,15 +9,13 @@ use stdClass;
 interface IUserBasedStorage {
 
     /**
-     * @param User $user
      * @param stdClass[] $tweets
      */
-    public function saveTweets(User $user, array $tweets);
+    public function saveTweets(array $tweets);
 
     /**
-     * @param User $user
      * @return stdClass|null
      */
-    public function getTweet(User $user);
+    public function getTweet();
 
 } 
