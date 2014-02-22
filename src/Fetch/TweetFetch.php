@@ -18,31 +18,30 @@ class TweetFetch {
     private $storage;
 
     public function __construct(ConfigProvider $configProvider, IUserBasedStorage $storage) {
-        $this->settings = $configProvider->getConfig();
+        $this->settings = $configProvider->getConsumerSecretPair();
         $this->usersListProvider = new StaticUsersListProvider();
         $this->storage = $storage;
     }
 
     public function fetchTweets() {
 
-        $url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
-        $requestMethod = 'GET';
+        $url = 'statuses/user_timeline';
 
         foreach($this->usersListProvider->getUsers() as $user) {
 
             // The alphabetical order of parameters matters, because of oAuth
-            $getField = "?screen_name=$user->userName";
+            // Max 20 tweets and include retweets
+            $parameters = [
+                "screen_name" => $user->userName,
+                "count" => 20,
+                "include_rts" => 1,
+                ];
 
-            $api = new TwitterAPIExchange($this->settings);
-
-            // Fields must be set first, in order for oAuth to be able to calculate the signature
-            $jsonResult = $api
-                ->setGetfield($getField)
-                ->buildOauth($url, $requestMethod)
-                ->performRequest();
-
+            $api = new \TwitterOAuth($this->settings["consumer_key"], $this->settings["consumer_secret"]);
+            $jsonResult = $api->get($url, $parameters);
+            
             // Enjoy the happiness
-            $tweets = json_decode($jsonResult);
+            $tweets = $jsonResult;
             $this->storage->saveTweets($tweets);
         }
 
