@@ -1,17 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pavel
- * Date: 2/12/14
- * Time: 9:44 PM
- */
 
 namespace Flock\Assessment;
 
-
-use Flock\Fetch\User;
-use Flock\Storage\RedisPublishStorage;
-use Flock\Storage\RedisUserBasedStorage;
 use stdClass;
 
 class DummyAssessment implements IAssessment {
@@ -24,6 +14,8 @@ class DummyAssessment implements IAssessment {
         'geekovo' => [self::PROGRAMOVANI_CZ],
         'ostoweb' => [self::PROGRAMOVANI_CZ],
         'marek_jelen' => [self::PROGRAMOVANI_CZ],
+        'VolmutJ' => [self::PROGRAMOVANI_CZ],
+        'pavelsmolka' => [self::PROGRAMOVANI_CZ],
         'cuketka' => [self::VARENI],
     ];
 

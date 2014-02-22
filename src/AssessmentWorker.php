@@ -1,15 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: pavel
- * Date: 2/22/14
- * Time: 6:00 PM
- */
 
 namespace Flock\Assessment;
 
-
-use Flock\Fetch\User;
 use Flock\IProcess;
 use Flock\Storage\IPublishStorage;
 use Flock\Storage\IUserBasedStorage;
