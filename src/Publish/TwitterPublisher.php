@@ -2,8 +2,8 @@
 
 namespace Flock\Publish;
 
+use Flock\Fetch\ConfigProvider;
 use Flock\Storage\IPublishStorage;
-use \Redis;
 use TwitterOAuth;
 use FlockConfigException;
 
@@ -19,7 +19,7 @@ class TwitterPublisher {
      */
     private $publishStorage;
 
-    public function __construct(IPublishStorage $publishStorage, $configProvider) {
+    public function __construct(IPublishStorage $publishStorage, ConfigProvider $configProvider) {
         $this->configProvider = $configProvider;
         $this->publishStorage = $publishStorage;
     }

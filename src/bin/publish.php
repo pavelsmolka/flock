@@ -1,17 +1,14 @@
 <?php
 
-use Flock\Assessment\SampleDataAssessment;
 use Flock\Publish\TwitterPublisher;
 use Flock\Fetch\ConfigProvider;
+use Flock\Storage\RedisPublishStorage;
 
 require_once "../../vendor/autoload.php";
 
 $configProvider = new ConfigProvider(__DIR__ . '/../../config/config2.ini');
 
+$dataStorage = new RedisPublishStorage();
 
-
-$assesment = new SampleDataAssessment();
-$assesment->assess();
-
-$publisher = new TwitterPublisher($configProvider);
+$publisher = new TwitterPublisher($dataStorage, $configProvider);
 $publisher->publish();
