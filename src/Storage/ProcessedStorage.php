@@ -4,7 +4,7 @@ namespace Flock\Storage;
 
 use Redis;
 
-class ProcessedStorage extends RedisStorage {
+class ProcessedStorage extends RedisStorage implements IProcessedStorage {
     
     const STORAGE_NAME = "p-tweets";
     

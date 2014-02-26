@@ -7,7 +7,7 @@ use Redis;
 class RedisPublishStorage extends RedisStorage implements IPublishStorage {
 
     public function toBePublished($accountName, $tweetId) {
-        $this->redis->sAdd($accountName, $tweetId);
+        return $this->redis->sAdd($accountName, $tweetId);
     }
 
     public function getTweetId($accountName) {

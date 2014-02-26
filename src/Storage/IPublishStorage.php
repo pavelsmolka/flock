@@ -14,7 +14,7 @@ interface IPublishStorage {
     /**
      * @param string $accountName
      * @param int $tweetId
-     * @return void
+     * @return int
      */
     public function toBePublished($accountName, $tweetId);
 
