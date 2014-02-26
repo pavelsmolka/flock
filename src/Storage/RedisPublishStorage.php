@@ -4,15 +4,7 @@ namespace Flock\Storage;
 
 use Redis;
 
-class RedisPublishStorage implements IPublishStorage {
-
-    /** @var Redis  */
-    protected $redis;
-
-    public function __construct() {
-        $this->redis = new Redis();
-        $this->redis->connect('localhost');
-    }
+class RedisPublishStorage extends RedisStorage implements IPublishStorage {
 
     public function toBePublished($accountName, $tweetId) {
         $this->redis->sAdd($accountName, $tweetId);
