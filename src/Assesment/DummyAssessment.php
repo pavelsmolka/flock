@@ -6,8 +6,6 @@ use stdClass;
 
 class DummyAssessment implements IAssessment {
 
-    const PROGRAMOVANI_CZ = 'programovaniCZ';
-    const VARENI = 'vareni';
 
     protected $rules = [
         'honzajavorek' => [self::PROGRAMOVANI_CZ],

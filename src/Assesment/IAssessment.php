@@ -5,6 +5,9 @@ use stdClass;
 
 interface IAssessment {
 
+    const PROGRAMOVANI_CZ = 'programovaniCZ';
+    const VARENI = 'vareni';
+
     /**
      * Decides how to treat a tweet:
      *  Q: Where to publish?

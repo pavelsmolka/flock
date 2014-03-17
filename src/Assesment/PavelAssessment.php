@@ -16,6 +16,14 @@ class PavelAssessment implements IAssessment {
      * @return int[] Array of account IDs where the tweet should be published
      */
     public function assess(stdClass $tweet) {
-        // TODO: Implement assess() method.
+        if (!isset($tweet->retweet_count) || !isset($tweet->favorite_count)) {
+            throw new \FlockException('Tweet without retweet_count or favorite_count');
+        }
+
+        if ($tweet->retweet_count + $tweet->favorite_count > 20) {
+            return [self::PROGRAMOVANI_CZ];
+        } else {
+            return [];
+        }
     }
 } 

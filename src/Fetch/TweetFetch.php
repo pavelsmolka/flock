@@ -26,15 +26,16 @@ class TweetFetch {
     public function fetchTweets() {
 
         $url = 'statuses/user_timeline';
+        $url = 'followers/ids';
 
         foreach($this->usersListProvider->getUsers() as $user) {
 
             // The alphabetical order of parameters matters, because of oAuth
             // Max 20 tweets and include retweets
             $parameters = [
-                "screen_name" => $user->userName,
-                "count" => 20,
-                "include_rts" => 1,
+                "screen_name" => 'zdrojak',
+                //"count" => 20,
+                //"include_rts" => 1,
                 ];
 
             $api = new \TwitterOAuth($this->settings["consumer_key"], $this->settings["consumer_secret"]);
@@ -42,6 +43,19 @@ class TweetFetch {
             
             // Enjoy the happiness
             $tweets = $jsonResult;
+
+            $hnIds = [116276133, 148969874, 149124522, 169630984, 429863153, 1613217654, 1613233376];
+            foreach($jsonResult->ids as $id) {
+                $userUrl = 'friends/ids';
+                $following = $api->get($userUrl, ['user_id' => $id]);
+                foreach($following->ids as $follow) {
+                    if (in_array($follow, [])) {
+                        echo $id;
+                        echo "\n";
+                        break;
+                    }
+                }
+            }
             $this->storage->saveTweets($tweets);
         }
 
