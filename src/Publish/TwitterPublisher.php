@@ -5,9 +5,10 @@ namespace Flock\Publish;
 use Flock\Fetch\ConfigProvider;
 use Flock\Storage\IPublishStorage;
 use TwitterOAuth;
+use IPublisher;
 use FlockConfigException;
 
-class TwitterPublisher {
+class TwitterPublisher implements IPublisher {
 
     /** @var \Flock\Fetch\ConfigProvider */
     private $configProvider;
@@ -20,8 +21,8 @@ class TwitterPublisher {
     private $publishStorage;
 
     public function __construct(IPublishStorage $publishStorage, ConfigProvider $configProvider) {
-        $this->configProvider = $configProvider;
         $this->publishStorage = $publishStorage;
+        $this->configProvider = $configProvider;
     }
 
     public function publish() {
