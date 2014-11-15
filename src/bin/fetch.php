@@ -13,8 +13,12 @@ require_once __DIR__ . "/../../vendor/autoload.php";
 $configProvider = new EnvironmentConfigProvider();
 $tweetFetch = new TweetFetch($configProvider, new RedisUserBasedStorage());
 
+$logger = new \Monolog\Logger("log");
+$logger->pushHandler(new \Monolog\Handler\ErrorLogHandler());
+
 try {
 
+    $tweetFetch->setLogger($logger);
     $tweetFetch->fetchTweets();
 
 } catch(FlockException $e) {

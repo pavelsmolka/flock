@@ -4,6 +4,8 @@
 
     "require" : {
         "php": ">=5.4",
+        "psr/log": "~1.0",
+        "monolog/monolog": "*",
         "j7mbo/twitter-api-php": "dev-master",
         "kertz/twitteroauth": "dev-master"
     },

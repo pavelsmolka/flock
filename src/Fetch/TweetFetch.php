@@ -5,9 +5,12 @@ namespace Flock\Fetch;
 use Flock\Config\AbstractConfigProvider;
 use Flock\Config\IniFileConfigProvider;
 use Flock\Storage\IUserBasedStorage;
+use Psr\Log\LoggerAwareTrait;
 use TwitterOAuth;
 
 class TweetFetch {
+
+    use LoggerAwareTrait;
 
     /** @var TwitterOAuth */
     protected $api;
@@ -35,14 +38,17 @@ class TweetFetch {
 
     public function fetchTweets() {
 
+        $this->logger->info('Fetching tweets.');
         $url = 'statuses/user_timeline';
 
         foreach($this->usersListProvider->getUsers() as $user) {
 
+            $this->logger->info('Fetching tweets for user: ', ['user' => $user->userName]);
+
             // The alphabetical order of parameters matters, because of oAuth
             // Max 20 tweets and include retweets
             $parameters = [
-                "screen_name" => $user,
+                "screen_name" => $user->userName,
                 "count" => 20,
                 "include_rts" => 1,
             ];
@@ -52,10 +58,10 @@ class TweetFetch {
             // We might want to construct our own Tweet objects
             if (is_array($tweets)) {
                 // Save results
+                $this->logger->info('Saving tweets into redis: ', ['count' => count($tweets)]);
                 $this->storage->saveTweets($tweets);
             } else {
-                echo json_encode($tweets);
-                echo "\n";
+                $this->logger->warning('Response is not array - probably error: ', ['response' => $tweets]);
             }
 
         }
