@@ -1,5 +1,7 @@
 <?php
 
-class FlockException extends Exception {}
+namespace Flock;
 
-class FlockConfigException extends Exception {}
+class FlockException extends \Exception {}
+
+class FlockConfigException extends FlockException {}

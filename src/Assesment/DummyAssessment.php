@@ -2,6 +2,7 @@
 
 namespace Flock\Assessment;
 
+use Flock\FlockException;
 use stdClass;
 
 class DummyAssessment implements IAssessment {
@@ -20,7 +21,7 @@ class DummyAssessment implements IAssessment {
     public function assess(stdClass $tweet) {
 
         if (!isset($tweet->user->screen_name)) {
-            throw new \FlockException("Invalid tweet entity (does not contain screen_name");
+            throw new FlockException("Invalid tweet entity (does not contain screen_name");
         }
 
         $userName = $tweet->user->screen_name;

@@ -1,29 +1,14 @@
 <?php
 
-namespace Flock\Fetch;
+namespace Flock\Config;
 
-use FlockConfigException;
 
-class ConfigProvider {
+use Flock\FlockConfigException;
+use Flock\FlockException;
 
-    /** @var string */
-    protected $configPath;
-    protected $config;
+abstract class AbstractConfigProvider {
 
-    public function __construct($configPath) {
-        $this->configPath = $configPath;
-
-        if (!is_file($this->configPath) || !is_readable($this->configPath)) {
-            throw new FlockConfigException("Config file $this->configPath does not exist or it cannot be read.");
-        }
-        $settings = parse_ini_file($this->configPath);
-
-        if (!is_array($settings)) {
-            throw new FlockConfigException("File $this->configPath apparently contains some bullshit, not INI values.");
-        }
-
-        $this->config = $settings;
-    }
+    protected $config = [];
 
     /**
      * Settings has to be an associative array, config should look like this:
@@ -49,7 +34,7 @@ class ConfigProvider {
 
     public function getAuthPair($name) {
         if ($this->isNameSet("ot_" . $name) &&
-                $this->isNameSet("ots_" . $name)) {
+            $this->isNameSet("ots_" . $name)) {
             return [
                 "oauth_access_token" => $this->config["ot_" . $name],
                 "oauth_access_token_secret" => $this->config["ots_" . $name]
@@ -69,8 +54,8 @@ class ConfigProvider {
             throw new FlockConfigException("There is not any customer secret pair in the config file");
         }
     }
-    
-    private function isNameSet($name) {
+
+    protected function isNameSet($name) {
         if (isset($this->config[$name])) {
             return true;
         } else {

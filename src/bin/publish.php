@@ -1,13 +1,15 @@
 <?php
 
+use Flock\Config\EnvironmentConfigProvider;
 use Flock\Publish\TwitterPublisher;
 use \Flock\Publish\EchoPublisher;
-use Flock\Fetch\ConfigProvider;
+use Flock\Config\IniFileConfigProvider;
 use Flock\Storage\RedisPublishStorage;
 
-require_once "../../vendor/autoload.php";
+require_once __DIR__ . "/../../vendor/autoload.php";
 
-$configProvider = new ConfigProvider(__DIR__ . '/../../config/config.ini');
+//$configProvider = new IniFileConfigProvider(__DIR__ . '/../../config/config.ini');
+$configProvider = new EnvironmentConfigProvider();
 
 $dataStorage = new RedisPublishStorage();
 

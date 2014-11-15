@@ -2,9 +2,9 @@
 
 namespace Flock\Publish;
 
+use Flock\Config\AbstractConfigProvider;
 use IPublisher;
 use Flock\Storage\IPublishStorage;
-use Flock\Fetch\ConfigProvider;
 
 /**
  * This class just writes tweets to the output.
@@ -14,7 +14,7 @@ use Flock\Fetch\ConfigProvider;
  */
 class EchoPublisher implements IPublisher {
 
-    /** @var \Flock\Fetch\ConfigProvider */
+    /** @var AbstractConfigProvider */
     private $configProvider;
 
     /**
@@ -22,7 +22,7 @@ class EchoPublisher implements IPublisher {
      */
     private $publishStorage;
 
-    public function __construct(IPublishStorage $publishStorage, ConfigProvider $configProvider) {
+    public function __construct(IPublishStorage $publishStorage, AbstractConfigProvider $configProvider) {
         $this->publishStorage = $publishStorage;
         $this->configProvider = $configProvider;
     }

@@ -2,8 +2,6 @@
 
 namespace Flock\Storage;
 
-
-use Flock\Fetch\User;
 use stdClass;
 
 interface IUserBasedStorage {

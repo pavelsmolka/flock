@@ -3,6 +3,7 @@
 namespace Flock\Assessment;
 
 
+use Flock\FlockException;
 use stdClass;
 
 class PavelAssessment implements IAssessment {
@@ -17,7 +18,7 @@ class PavelAssessment implements IAssessment {
      */
     public function assess(stdClass $tweet) {
         if (!isset($tweet->retweet_count) || !isset($tweet->favorite_count)) {
-            throw new \FlockException('Tweet without retweet_count or favorite_count');
+            throw new FlockException('Tweet without retweet_count or favorite_count');
         }
 
         if ($tweet->retweet_count + $tweet->favorite_count > 20) {
