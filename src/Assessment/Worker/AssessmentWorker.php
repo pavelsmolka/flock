@@ -1,7 +1,8 @@
 <?php
 
-namespace Flock\Assessment;
+namespace Flock\Assessment\Worker;
 
+use Flock\Assessment\IAssessment;
 use Flock\IProcess;
 use Flock\Storage\IPublishStorage;
 use Flock\Storage\IUserBasedStorage;

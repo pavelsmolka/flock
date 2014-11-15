@@ -1,8 +1,7 @@
 <?php
 
-use Flock\Assessment\AssessmentWorker;
-use Flock\Assessment\DummyAssessment;
-use Flock\Assessment\EchoAssessmentWorker;
+use Flock\Assessment\Worker\AssessmentWorker;
+use Flock\Assessment\UserCategoryMapAssessment;
 use Flock\Assessment\HonzaAssessment;
 use Flock\Storage\RedisPublishStorage;
 use Flock\Storage\RedisUserBasedStorage;
@@ -10,10 +9,10 @@ use Flock\Storage\ProcessedStorage;
 
 require_once __DIR__ . "/../../vendor/autoload.php";
 
-$assessment = new DummyAssessment();
+$assessment = new UserCategoryMapAssessment();
 
 $sourceStorage = new RedisUserBasedStorage();
-//$sourceStorage = new SampleDataStorage();
+//$sourceStorage = new SampleDataStorgit statusage();
 $resultStorage = new RedisPublishStorage();
 $processedStorage = new ProcessedStorage();
 

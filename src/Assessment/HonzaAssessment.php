@@ -4,7 +4,17 @@ namespace Flock\Assessment;
 
 use stdClass;
 
-class HonzaAssessment extends Assessment {
+class HonzaAssessment implements IAssessment {
+
+    protected $users = [
+        'honzajavorek' => [self::PROGRAMOVANI_CZ],
+        'geekovo' => [self::PROGRAMOVANI_CZ],
+        'ostoweb' => [self::PROGRAMOVANI_CZ],
+        'marek_jelen' => [self::PROGRAMOVANI_CZ],
+        'VolmutJ' => [self::PROGRAMOVANI_CZ],
+        'pavelsmolka' => [self::PROGRAMOVANI_CZ],
+        'cuketka' => [self::VARENI],
+    ];
 
     private $ruleSet = [
         "default" => [

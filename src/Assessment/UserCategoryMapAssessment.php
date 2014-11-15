@@ -5,7 +5,7 @@ namespace Flock\Assessment;
 use Flock\FlockException;
 use stdClass;
 
-class DummyAssessment implements IAssessment {
+class UserCategoryMapAssessment implements IAssessment {
 
 
     protected $rules = [

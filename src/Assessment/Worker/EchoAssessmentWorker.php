@@ -1,5 +1,6 @@
 <?php
-namespace Flock\Assessment;
+namespace Flock\Assessment\Worker;
+use Flock\Assessment\Worker\AssessmentWorker;
 
 /**
  * EchoAssessmentWorker is testing class for assessments whether they are 
